@@ -24,9 +24,11 @@ export default function StaffNotation({ selectedNote, onSelectNote, onPlayNote }
     const stave = new Stave(10, 20, 800)
     stave.addClef('treble').setContext(context).draw()
 
-    const staveNotes = NOTES.map(
-      (n) => new StaveNote({ keys: [n], duration: 'q' }),
-    )
+    const staveNotes = NOTES.map((n) => {
+      const [letter, octave] = n.split(/(\d+)/).filter(Boolean)
+      const key = `${letter.toLowerCase()}/${octave}`
+      return new StaveNote({ keys: [key], duration: 'q' })
+    })
     Formatter.FormatAndDraw(context, stave, staveNotes)
 
     staveNotes.forEach((noteEl, i) => {
