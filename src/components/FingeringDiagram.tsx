@@ -19,6 +19,9 @@ const FINGERINGS: Record<string, string[]> = {
   E4: ['L1', 'L2', 'L3', 'R1'],
   F4: ['L1', 'L2', 'L3'],
   G4: ['L1', 'L2'],
+  A4: ['L1', 'L2', 'L3', 'R1', 'R2'],
+  B4: ['L1', 'L2', 'L3', 'R1', 'R2', 'R3'],
+  C5: ['L1', 'L2', 'L3', 'R1', 'R2', 'R3', 'R4'],
 }
 
 export default function FingeringDiagram({ selectedNote }: FingeringDiagramProps) {

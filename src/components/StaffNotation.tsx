@@ -7,7 +7,7 @@ export interface StaffNotationProps {
   onPlayNote?: (note: string) => void
 }
 
-const NOTES = ['C4', 'D4', 'E4', 'F4', 'G4']
+const NOTES = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5']
 
 export default function StaffNotation({ selectedNote, onSelectNote, onPlayNote }: StaffNotationProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -18,10 +18,10 @@ export default function StaffNotation({ selectedNote, onSelectNote, onPlayNote }
 
     container.innerHTML = ''
     const renderer = new Renderer(container, Renderer.Backends.SVG)
-    renderer.resize(600, 160)
+    renderer.resize(840, 160)
     const context = renderer.getContext()
 
-    const stave = new Stave(10, 20, 560)
+    const stave = new Stave(10, 20, 800)
     stave.addClef('treble').setContext(context).draw()
 
     const staveNotes = NOTES.map(
@@ -29,27 +29,26 @@ export default function StaffNotation({ selectedNote, onSelectNote, onPlayNote }
     )
     Formatter.FormatAndDraw(context, stave, staveNotes)
 
-    const svg = container.querySelector('svg')
-    if (svg) {
-      svg.querySelectorAll('g').forEach((g, i) => {
-        const note = NOTES[i]
-        if (!note) return
-        g.setAttribute('style', 'cursor: pointer;')
-        g.addEventListener('click', () => {
-          onSelectNote(note)
-          onPlayNote?.(note)
-        })
-        if (note === selectedNote) {
-          g.setAttribute('fill', '#c9a227')
-        }
+    staveNotes.forEach((noteEl, i) => {
+      const note = NOTES[i]
+      if (!note) return
+      const el = noteEl.getSVGElement()
+      if (!el) return
+      el.setAttribute('style', 'cursor: pointer;')
+      el.addEventListener('click', () => {
+        onSelectNote(note)
+        onPlayNote?.(note)
       })
-    }
+      if (note === selectedNote) {
+        el.setAttribute('fill', '#c9a227')
+      }
+    })
   }, [selectedNote, onSelectNote, onPlayNote])
 
   return (
     <div className="rounded-lg border border-brass/40 p-2">
       <h2 className="text-lg font-semibold mb-1">Staff Notation</h2>
-      <div ref={containerRef} className="flex justify-center" />
+      <div ref={containerRef} className="flex justify-center overflow-x-auto" />
     </div>
   )
 }
