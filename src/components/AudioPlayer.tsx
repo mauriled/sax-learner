@@ -11,7 +11,7 @@ const NOTE_FREQ: Record<string, string> = {
   D4: 'D4',
   E4: 'E4',
   F4: 'F4',
-  G5: 'G5',
+  G4: 'G4',
 }
 
 export default function AudioPlayer({ selectedNote, registerPlay }: AudioPlayerProps) {

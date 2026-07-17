@@ -7,7 +7,7 @@ export interface StaffNotationProps {
   onPlayNote?: (note: string) => void
 }
 
-const NOTES = ['C4', 'D4', 'E4', 'F4', 'G5']
+const NOTES = ['C4', 'D4', 'E4', 'F4', 'G4']
 
 export default function StaffNotation({ selectedNote, onSelectNote, onPlayNote }: StaffNotationProps) {
   const containerRef = useRef<HTMLDivElement>(null)
