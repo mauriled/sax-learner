@@ -25,7 +25,7 @@ export default function StaffNotation({ selectedNote, onSelectNote, onPlayNote }
     stave.addClef('treble').setContext(context).draw()
 
     const staveNotes = NOTES.map(
-      (n) => new StaveNote({ keys: [n.toLowerCase()], duration: 'q' }),
+      (n) => new StaveNote({ keys: [n], duration: 'q' }),
     )
     Formatter.FormatAndDraw(context, stave, staveNotes)
 
