@@ -35,9 +35,13 @@ export default function StaffNotation({ selectedNote, onSelectNote, onPlayNote }
       const el = noteEl.getSVGElement()
       if (!el) return
       el.setAttribute('style', 'cursor: pointer;')
+      el.setAttribute('data-note', note)
       el.addEventListener('click', () => {
-        onSelectNote(note)
-        onPlayNote?.(note)
+        const note = el.getAttribute('data-note')
+        if (note) {
+          onSelectNote(note)
+          onPlayNote?.(note)
+        }
       })
       if (note === selectedNote) {
         el.setAttribute('fill', '#c9a227')
