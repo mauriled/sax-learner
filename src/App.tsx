@@ -9,6 +9,9 @@ import './App.css'
 function App() {
   const [selectedNote, setSelectedNote] = useState('C4')
   const [instrument, setInstrument] = useState<'alto' | 'tenor'>('alto')
+  const audioRef = useState(() => {
+    return { current: null as null | ((note: string) => void) }
+  })[0]
 
   return (
     <div className="p-4 max-w-4xl mx-auto space-y-4">
@@ -19,11 +22,15 @@ function App() {
 
       <InstrumentSelector instrument={instrument} onChange={setInstrument} />
 
-      <StaffNotation selectedNote={selectedNote} onSelectNote={setSelectedNote} />
+      <StaffNotation
+        selectedNote={selectedNote}
+        onSelectNote={setSelectedNote}
+        onPlayNote={(note) => audioRef.current?.(note)}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FingeringDiagram selectedNote={selectedNote} />
-        <AudioPlayer selectedNote={selectedNote} />
+        <AudioPlayer selectedNote={selectedNote} registerPlay={audioRef} />
       </div>
 
       <Tuner cents={0} history={[12, -5, 3, -8, 0, 4]} />

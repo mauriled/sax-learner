@@ -3,6 +3,7 @@ import * as Tone from 'tone'
 
 export interface AudioPlayerProps {
   selectedNote: string
+  registerPlay?: { current: ((note: string) => void) | null }
 }
 
 const NOTE_FREQ: Record<string, string> = {
@@ -10,19 +11,27 @@ const NOTE_FREQ: Record<string, string> = {
   D4: 'D4',
   E4: 'E4',
   F4: 'F4',
-  G4: 'G4',
+  G5: 'G5',
 }
 
-export default function AudioPlayer({ selectedNote }: AudioPlayerProps) {
+export default function AudioPlayer({ selectedNote, registerPlay }: AudioPlayerProps) {
   const synthRef = useRef<Tone.Synth | null>(null)
 
   useEffect(() => {
     const synth = new Tone.Synth().toDestination()
     synthRef.current = synth
+    const play = (note: string) => {
+      void Tone.start().then(() => {
+        const freq = NOTE_FREQ[note] ?? note
+        synth.triggerAttackRelease(freq, '8n')
+      })
+    }
+    if (registerPlay) registerPlay.current = play
     return () => {
       synth.dispose()
+      if (registerPlay) registerPlay.current = null
     }
-  }, [])
+  }, [registerPlay])
 
   const play = async () => {
     await Tone.start()
