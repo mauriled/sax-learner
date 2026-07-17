@@ -1,33 +1,32 @@
-# Sax Learner
+# React + TypeScript + Vite
 
-Interactive saxophone learning web application with staff notation, fingering diagrams, and tuner.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Features
+Currently, two official plugins are available:
 
-- **Interactive Staff Notation**: Click on notes to see fingerings and hear the sound
-- **Fingering Diagrams**: Visual hand positions for alto and tenor saxophone
-- **Audio Playback**: Hear each note when selected
-- **Built-in Tuner**: Real-time pitch detection with history visualization
-- **PWA Support**: Installable and works offline
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Tech Stack
+## React Compiler
 
-- React 18 + TypeScript
-- Vite
-- VexFlow 5 (music notation)
-- Tone.js (audio playback)
-- Chart.js (tuner history)
-- Tailwind CSS (styling)
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Development
+## Expanding the Oxlint configuration
 
-```bash
-npm install
-npm run dev
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
 ```
 
-## Build
-
-```bash
-npm run build
-```
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
