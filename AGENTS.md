@@ -24,6 +24,49 @@ npm run lint         # oxlint
 ```
 Index of components: `src/components/` (StaffNotation, FingeringDiagram, AudioPlayer, Tuner/TunerGauge/HistoryChart, InstrumentSelector). Shared UI state (selected note, instrument) lives in `src/App.tsx`.
 
+## Architecture
+
+### Component Hierarchy
+```
+App.tsx
+├── InstrumentSelector     # Selects alto/tenor saxophone
+├── StaffNotation          # VexFlow-rendered treble clef (click to select)
+├── FingeringDiagram       # SVG saxophone key visualization
+├── AudioPlayer            # Tone.js synth playback
+└── Tuner
+    ├── TunerGauge         # Cents deviation indicator
+    └── HistoryChart       # Chart.js tuning history line chart
+```
+
+### Data Flow
+- `selectedNote` and `instrument` state are managed in App.tsx
+- StaffNotation calls `onSelectNote` and `onPlayNote` callbacks on click
+- FingeringDiagram reads fingering data from `FINGERINGS` constant
+- AudioPlayer registers its play function via `registerPlay` ref for external access
+
+## Fingering Data
+
+`src/components/FingeringDiagram.tsx` defines:
+- `KEY_LAYOUT`: Array of 8 keys (L1-L4 left hand, R1-R4 right hand) with SVG coordinates
+- `FINGERINGS`: Record mapping note names (C4-C5) to arrays of pressed key IDs
+
+## Note Frequencies
+
+`src/components/AudioPlayer.tsx` contains `NOTE_FREQ`:
+- Maps note names (C4-C5) to Tone.js pitch strings
+- Used by the Tone.Synth to generate reference audio
+
+## PWA Configuration
+
+`vite.config.ts` configures vite-plugin-pwa with:
+- `registerType: 'autoUpdate'` - Auto-updates service worker on new content
+- Manifest with name "Sax Learner" and short_name "SaxLearner"
+- Icons array empty (add icon files to public/ and register in manifest)
+
+## Testing
+
+Currently lint + typecheck via `npm run build` (runs `tsc -b`). No dedicated test framework.
+
 ## Git workflow
 - Default branch is `main`; never commit or push to it directly.
 - Create feature branches (`fm/<topic>`); push via the no-mistakes gate: `git push no-mistakes <branch>`.

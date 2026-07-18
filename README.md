@@ -1,32 +1,45 @@
-# React + TypeScript + Vite
+# Sax Learner
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An interactive web application for learning saxophone fingerings, reading sheet music, and practicing pitch tuning.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Staff Notation** - Visual treble clef notation with clickable notes rendered using VexFlow. Select any note to see its fingering and hear its pitch.
+- **Fingering Diagram** - Interactive saxophone fingering chart showing which keys to press for each note. Works with alto and tenor saxophone layouts.
+- **Tuner** - Visual pitch tuning indicator with a gauge showing cents deviation and a history chart tracking your tuning accuracy over time.
+- **Audio Player** - Built-in synthesizer using Tone.js to play reference pitches for each note.
 
-## React Compiler
+## Quick Start
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install          # Install dependencies
+npm run dev          # Start dev server at http://localhost:5173
+npm run build        # Build for production (includes PWA service worker)
+npm run lint         # Run oxlint
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Available Controls
+
+### Selecting Notes
+- Click any note on the staff notation to select it
+- The selected note will be highlighted in brass color (#c9a227)
+
+### Playing Audio
+- Click the "Play {note}" button in the Audio Player panel to hear a reference pitch
+- Or click directly on a note in the staff notation to hear it automatically
+
+### Switching Instruments
+- Use the instrument selector to toggle between alto and tenor saxophone
+- The fingering diagram updates to show the appropriate key layout
+
+### Using the Tuner
+- The tuner gauge shows pitch accuracy in cents
+- Left of center = flat, right = sharp, center = in tune
+- The history chart displays recent tuning measurements
+
+## Practice Workflow
+
+1. Select a note on the staff or use the instrument selector
+2. Observe the correct fingering in the diagram
+3. Play the reference audio to hear the target pitch
+4. Use the tuner to check and adjust your playing accuracy
