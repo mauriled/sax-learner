@@ -31,14 +31,14 @@ Before submitting changes:
 
 ```
 src/
-├── components/
-│   ├── App.tsx            # Main app with shared state
-│   ├── StaffNotation.tsx  # VexFlow staff rendering
-│   ├── FingeringDiagram.tsx # SVG key diagram
-│   ├── AudioPlayer.tsx    # Tone.js synthesizer
-│   ├── Tuner.tsx          # Tuner container
-│   ├── TunerGauge.tsx     # Visual tuning indicator
-│   ├── HistoryChart.tsx   # Chart.js tuning history
-│   └── InstrumentSelector.tsx # Alto/tenor toggle
-└── main.tsx             # React entry point
+├── App.tsx              # Main app with shared state
+├── main.tsx             # React entry point
+└── components/
+    ├── StaffNotation.tsx  # VexFlow staff rendering
+    ├── FingeringDiagram.tsx # SVG key diagram
+    ├── AudioPlayer.tsx    # Tone.js synthesizer
+    ├── Tuner.tsx          # Tuner container
+    ├── TunerGauge.tsx     # Visual tuning indicator
+    ├── HistoryChart.tsx   # Chart.js tuning history
+    └── InstrumentSelector.tsx # Alto/tenor toggle
 ```

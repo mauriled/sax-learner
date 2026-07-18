@@ -31,7 +31,7 @@ The fingering diagram displays a simplified saxophone key layout:
 | L1-L4 | Left hand | Top row |
 | R1-R4 | Right hand | Bottom row |
 
-The diagram shows fingerings for notes C4 through C5 (two octaves). When you select a note on the staff, the corresponding keys will light up in brass color to indicate which should be pressed.
+The diagram shows fingerings for notes C4 through C5 (one octave). When you select a note on the staff, the corresponding keys will light up in brass color to indicate which should be pressed.
 
 ## Feature Walkthrough
 
