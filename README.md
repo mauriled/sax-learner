@@ -33,4 +33,4 @@ See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rule
 
 ## Testing
 
-Run `npm run dev` to start the development server and test the app locally.
+Run `npm run test` to run the test suite locally.
